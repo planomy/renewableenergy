@@ -814,8 +814,7 @@ function renderSlide(s){
   let html='';
   if(s.eyebrowR) html+=`<div class="eyebrow-r">${s.eyebrowR}</div>`;
   if(s.type==='cover'){
-    html += `<span class="eyebrow">${s.eyebrow||''}</span><h1 class="title">${s.title}</h1><p class="sub">${s.sub||''}</p>
-      <div class="meta">${(s.meta||[]).map(m=>`<span class="pill">${m}</span>`).join('')}</div>`;
+    html += `<span class="eyebrow">${s.eyebrow||''}</span><h1 class="title">${s.title}</h1><p class="sub">${s.sub||''}</p>`;
   } else if(s.type==='divider'){
     html += `<div class="pkr">${s.eyebrow||''}</div><h1>${s.title}</h1>
       <div class="goals">${(s.goals||[]).map((g,i)=>`<div class="goal"><i style="background:var(--p${(i%5)+1})">${i+1}</i><span>${g}</span></div>`).join('')}</div>`;
