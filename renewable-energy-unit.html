@@ -42,7 +42,7 @@
   .col.right-a .wp{flex:0 0 auto;}
   .col.right-a .brain{flex:0 0 auto;}
   .col.right-a .win15{flex:0 0 auto;}
-  .col.right-a .imgframe.hero{flex:1 1 auto;min-height:min(36vh,300px);margin-top:auto;}
+  .col.right-a .imgframe.hero{flex:1 1 auto;min-height:min(26vh,220px);max-height:min(46vh,420px);margin-top:auto;}
   .col::-webkit-scrollbar{width:6px;} .col::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
   .col > .card.cream,
   .col > .steps{flex:0 1 auto;min-height:0;max-height:62%;overflow:auto;}
@@ -120,12 +120,14 @@
   .echk{display:flex;gap:10px;align-items:center;background:var(--chip-bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14.5px;}
   .echk .bx{flex:none;width:24px;height:24px;border-radius:7px;background:var(--mint);color:#1a3d32;display:grid;place-items:center;font-weight:900;}
   .imgframe{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--chip-bg);min-height:100px;}
-  .imgframe.hero{min-height:min(44vh,360px);}
+  .imgframe.hero{min-height:min(28vh,240px);display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#0c1619,#152428);}
   .imgframe img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
-  .imgframe.hero img{min-height:min(44vh,360px);}
+  /* Hero photos: show the whole image (less cropping); letterbox on dark frame */
+  .imgframe.hero img{width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center;min-height:0;}
   .imgframe:not(.hero) img{position:absolute;inset:0;}
   .imgframe.diagram img{object-fit:contain;background:var(--bg0);}
-  .imgframe.hero.diagram img{object-fit:contain;min-height:min(44vh,360px);}
+  .imgframe.hero.diagram{background:var(--bg0);}
+  .imgframe.hero.diagram img{object-fit:contain;min-height:0;}
   .imgframe.fit img{object-fit:contain;}
   .imgframe .cap{position:absolute;left:0;right:0;bottom:0;z-index:1;background:linear-gradient(transparent,rgba(10,20,25,.92));color:#e8f0ee;font-size:12.5px;padding:18px 12px 8px;font-weight:600;}
   .slide.cover{align-items:flex-start;justify-content:center;text-align:left;}
