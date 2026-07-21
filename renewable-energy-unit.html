@@ -76,6 +76,35 @@
   .brain li{display:flex;gap:10px;font-size:clamp(13.5px,1.35vw,17px);line-height:1.28;}
   .brain .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:13px;color:#1a3d32;background:linear-gradient(135deg,var(--mint),var(--accent));}
 
+
+  /* Cloze knowledge (Screen C left) */
+  .col > .card.cloze-card{flex:1 1 auto;min-height:0;max-height:none;overflow:auto;display:flex;flex-direction:column;}
+  .cloze-card h3{font-size:clamp(17px,1.8vw,22px);margin:4px 0 10px;}
+  .cloze-passage{font-size:clamp(15px,1.45vw,19px);line-height:1.65;color:var(--cream-ink);flex:1 1 auto;}
+  .cloze-blank{display:inline-flex;align-items:center;justify-content:center;min-width:4.5em;min-height:1.35em;margin:0 2px;padding:1px 8px;
+    border-bottom:2.5px solid #c4b88a;border-radius:6px 6px 0 0;background:rgba(255,255,255,.55);cursor:pointer;
+    font-weight:800;color:var(--notice-ink);vertical-align:baseline;transition:background .15s,border-color .15s;}
+  .cloze-blank:hover{background:#fff;}
+  .cloze-blank.filled{border-bottom-color:var(--accent);background:#e8f6f1;}
+  .cloze-blank.correct{border-bottom-color:#2d6b58;background:var(--notice-bg);}
+  .cloze-blank.wrong{border-bottom-color:#c45a5a;background:#fde8e8;}
+  .cloze-blank .slot-n{font-size:10px;font-weight:800;color:#8a7a4a;margin-right:4px;}
+  .cloze-bank-lbl{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6a5a30;}
+  .cloze-bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+  .cloze-bank .chip{cursor:pointer;user-select:none;background:#fff;border:1px solid #d8cda6;border-radius:999px;padding:7px 12px;
+    font-size:14px;font-weight:700;color:var(--cream-ink);transition:transform .12s,opacity .12s,border-color .12s;}
+  .cloze-bank .chip:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .cloze-bank .chip.picked{border-color:var(--accent);box-shadow:0 0 0 2px rgba(74,158,142,.35);background:#e8f6f1;}
+  .cloze-bank .chip.used{opacity:.35;pointer-events:none;text-decoration:line-through;}
+  .cloze-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .cloze-actions button{font:inherit;font-size:13px;font-weight:800;border-radius:999px;padding:7px 14px;cursor:pointer;
+    border:1px solid #d8cda6;background:#fff;color:var(--cream-ink);}
+  .cloze-actions button.primary{background:var(--mint);border-color:var(--mint);color:#063a2c;}
+  .cloze-hint{margin-top:8px;font-size:13px;color:#4a5a54;font-style:italic;}
+  .cols.screen-c{grid-template-columns:1.2fr .95fr;}
+  .col.right-c > .discuss-card{flex:1 1 auto;min-height:0;overflow:auto;}
+  .col.right-c > .steps{flex:0 1 auto;max-height:48%;}
+
   .know-card h3{font-size:17px;margin:8px 0 6px}
   .know-list{margin:8px 0 0;padding-left:18px;font-size:14px;line-height:1.45;color:var(--cream-ink)}
   .know-list li{margin-bottom:6px}
@@ -163,8 +192,8 @@
   html.presenting .corner,html.presenting .screenlbl,html:fullscreen .corner,html:fullscreen .screenlbl{display:none;}
   html.presenting .cols,html:fullscreen .cols{flex:1;min-height:0;align-items:stretch;}
   html.presenting .col,html:fullscreen .col{height:100%;}
-  html.presenting .col > .card.cream,html.presenting .col > .steps,html.presenting .col > .brain,html.presenting .col > .hook,html.presenting .col > .imgframe,
-  html:fullscreen .col > .card.cream,html:fullscreen .col > .steps,html:fullscreen .col > .brain,html:fullscreen .col > .hook,html:fullscreen .col > .imgframe{
+  html.presenting .col > .card.cream,html.presenting .col > .card.cloze-card,html.presenting .col > .steps,html.presenting .col > .brain,html.presenting .col > .hook,html.presenting .col > .imgframe,
+  html:fullscreen .col > .card.cream,html:fullscreen .col > .card.cloze-card,html:fullscreen .col > .steps,html:fullscreen .col > .brain,html:fullscreen .col > .hook,html:fullscreen .col > .imgframe{
     flex:1 1 0;min-height:0;max-height:none;overflow:auto;
   }
   html.presenting .col > .exit,html:fullscreen .col > .exit{flex:0 0 auto;}
@@ -621,9 +650,9 @@ SLIDES.push({ nav:'L1C — Energy all around us',
   eyebrow:'Week 1 · Lesson 1 · Explore', eyebrowR:'Lesson 1 · Screen C',
   title:'Energy all around us',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Energy — go deeper',points:['<b>Energy</b> is the ability to do work or make things happen — it moves, heats and lights our world.','Energy cannot be created or destroyed; it <b>changes form</b> (food → movement, coal → electricity).','A <b>resource</b> is a supply we draw on; a <b>fuel</b> releases energy when used.','Brisbane homes use electricity from the grid, often generated far from where we switch lights on.']},{k:'discuss',title:'Discuss energy',label:'DISCUSS',prompts:['Name five energy uses in your morning — sort into heat, movement, light or sound.','Is food energy the same as electrical energy? What changes between them?','Where does the energy in a charged phone ultimately come from?','Why is energy a useful word in science but also in everyday speech (I have no energy)?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Energy hunt',d:'List 5 uses at home/school and label the energy form.'},{t:'Definition draft',d:'Write energy in your own words — no copying.'},{t:'Resource link',d:'Name one resource and what energy it provides.'},{t:'Report seed',d:'Draft one general statement for a report introduction.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Energy — cloze',text:'{{Energy}} is the ability to do work or make things happen — it moves, heats and lights our world. Energy cannot be created or destroyed; it {{changes form}} (food → movement, coal → electricity). A {{resource}} is a supply we draw on; a {{fuel}} releases energy when used. Brisbane homes use {{electricity}} from the grid, often generated far from where we switch lights on.'}],
+  right:[{k:'discuss',title:'Discuss energy',label:'DISCUSS',prompts:['Name five energy uses in your morning — sort into heat, movement, light or sound.','Is food energy the same as electrical energy? What changes between them?','Where does the energy in a charged phone ultimately come from?','Why is energy a useful word in science but also in everyday speech (I have no energy)?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Energy hunt',d:'List 5 uses at home/school and label the energy form.'},{t:'Definition draft',d:'Write energy in your own words — no copying.'},{t:'Resource link',d:'Name one resource and what energy it provides.'},{t:'Report seed',d:'Draft one general statement for a report introduction.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L1D — Glossary lock-in',
   eyebrow:'Week 1 · Lesson 1 · Secure', eyebrowR:'Lesson 1 · Screen D',
@@ -640,9 +669,9 @@ SLIDES.push({ nav:'L2C — T-chart stretch',
   eyebrow:'Week 1 · Lesson 2 · Explore', eyebrowR:'Lesson 2 · Screen C',
   title:'T-chart stretch',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Renewable vs non-renewable — go deeper',points:['<b>Renewable</b> sources are replaced naturally (sun, wind, water cycle, geothermal heat).','<b>Non-renewable</b> sources take millions of years to form — coal, oil, gas.','Fossil fuels store ancient solar energy captured by plants long ago.','Australia uses both types; Queensland has significant coal and growing solar.']},{k:'discuss',title:'Discuss renewable vs non-renewable',label:'DISCUSS',prompts:['If oil ran out tomorrow, what would change in your week first?','Can something be renewable in one place but scarce in another?','Why do non-renewable fuels still dominate many power grids?','How would you explain fossil fuel to a younger student?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'T-chart stretch',d:'Add column: Can it run out? with reasons.'},{t:'Example pairs',d:'Name one renewable and one non-renewable with everyday links.'},{t:'Sort drill',d:'Partner calls items — you answer renewable or non-renewable.'},{t:'Report vocab',d:'Use both terms in one compound sentence.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Renewable vs non-renewable — cloze',text:'{{Renewable}} sources are replaced naturally (sun, wind, water cycle, geothermal heat). {{Non-renewable}} sources take millions of years to form — coal, oil and gas. {{Fossil fuels}} store ancient solar energy captured by plants long ago. Australia uses both types; Queensland has significant {{coal}} and growing {{solar}}.'}],
+  right:[{k:'discuss',title:'Discuss renewable vs non-renewable',label:'DISCUSS',prompts:['If oil ran out tomorrow, what would change in your week first?','Can something be renewable in one place but scarce in another?','Why do non-renewable fuels still dominate many power grids?','How would you explain fossil fuel to a younger student?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'T-chart stretch',d:'Add column: Can it run out? with reasons.'},{t:'Example pairs',d:'Name one renewable and one non-renewable with everyday links.'},{t:'Sort drill',d:'Partner calls items — you answer renewable or non-renewable.'},{t:'Report vocab',d:'Use both terms in one compound sentence.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L2D — Sort under pressure',
   eyebrow:'Week 1 · Lesson 2 · Secure', eyebrowR:'Lesson 2 · Screen D',
@@ -659,9 +688,9 @@ SLIDES.push({ nav:'L3C — Climate link',
   eyebrow:'Week 1 · Lesson 3 · Explore', eyebrowR:'Lesson 3 · Screen C',
   title:'Climate link',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Why switch to renewables — go deeper',points:['Burning fossil fuels releases <b>emissions</b> that contribute to climate change.','<b>Sustainable</b> choices protect people and environments long-term.','Renewables reduce air pollution in cities and improve community health.','Report writers link causes (emissions) to effects (climate, weather extremes).']},{k:'discuss',title:'Discuss why switch to renewables',label:'DISCUSS',prompts:['Who benefits most from switching — today\'s citizens or future generations?','Can wealthy regions keep burning coal? What reasons might leaders give?','How is climate different from today\'s weather?','What general statement could open a report on renewables?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Climate link',d:'Chain: emissions → climate → community response.'},{t:'Stakeholder',d:'Name one group that gains and one that faces change.'},{t:'Report intro',d:'Write one general opening sentence.'},{t:'Evidence',d:'Cite one reason Queensland invests in solar.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Why switch — cloze',text:'Burning fossil fuels releases {{emissions}} that contribute to climate change. {{Sustainable}} choices protect people and environments long-term. Renewables reduce air {{pollution}} in cities and improve community health. Report writers link {{causes}} (emissions) to {{effects}} (climate and weather extremes).'}],
+  right:[{k:'discuss',title:'Discuss why switch to renewables',label:'DISCUSS',prompts:['Who benefits most from switching — today\'s citizens or future generations?','Can wealthy regions keep burning coal? What reasons might leaders give?','How is climate different from today\'s weather?','What general statement could open a report on renewables?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Climate link',d:'Chain: emissions → climate → community response.'},{t:'Stakeholder',d:'Name one group that gains and one that faces change.'},{t:'Report intro',d:'Write one general opening sentence.'},{t:'Evidence',d:'Cite one reason Queensland invests in solar.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L3D — Report seed',
   eyebrow:'Week 1 · Lesson 3 · Secure', eyebrowR:'Lesson 3 · Screen D',
@@ -679,9 +708,9 @@ SLIDES.push({ nav:'L4C — Solar in Australia',
   eyebrow:'Week 2 · Lesson 4 · Explore', eyebrowR:'Lesson 4 · Screen C',
   title:'Solar in Australia',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Solar energy in Australia',points:['The Sun delivers more energy to Earth in one hour than people use in a whole year.','A <b>solar panel</b> can make electricity (<b>photovoltaic</b>) or heat water directly.','Queensland\'s strong sunshine makes rooftop <b>solar</b> a smart choice for homes and schools.','Solar makes the most power in the middle of a clear, sunny day.']},{k:'discuss',title:'Discuss solar in Australia',label:'DISCUSS',prompts:['Why is Australia one of the best places on Earth for solar power?','Where around your school could solar panels go — and why there?','Solar makes most power at midday. When do homes use the most electricity?','What is one fact about solar you would put in a report introduction?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Sun facts',d:'Note two facts that show how much energy the Sun gives us.'},{t:'Local spot',d:'Name one Queensland place suited to solar and say why.'},{t:'Panel vs heat',d:'Write one line each: solar for electricity vs solar for heat.'},{t:'Report line',d:'Draft one factual sentence defining solar energy.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Solar in Australia — cloze',text:'The Sun delivers more energy to Earth in one hour than people use in a whole year. A {{solar panel}} can make electricity ({{photovoltaic}}) or heat water directly. Queensland\'s strong sunshine makes rooftop {{solar}} a smart choice for homes and schools. Solar makes the most {{power}} in the middle of a clear, sunny day.'}],
+  right:[{k:'discuss',title:'Discuss solar in Australia',label:'DISCUSS',prompts:['Why is Australia one of the best places on Earth for solar power?','Where around your school could solar panels go — and why there?','Solar makes most power at midday. When do homes use the most electricity?','What is one fact about solar you would put in a report introduction?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Sun facts',d:'Note two facts that show how much energy the Sun gives us.'},{t:'Local spot',d:'Name one Queensland place suited to solar and say why.'},{t:'Panel vs heat',d:'Write one line each: solar for electricity vs solar for heat.'},{t:'Report line',d:'Draft one factual sentence defining solar energy.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L4D — Solar glossary prove',
   eyebrow:'Week 2 · Lesson 4 · Secure', eyebrowR:'Lesson 4 · Screen D',
@@ -698,9 +727,9 @@ SLIDES.push({ nav:'L5C — Panel parts talk',
   eyebrow:'Week 2 · Lesson 5 · Explore', eyebrowR:'Lesson 5 · Screen C',
   title:'Panel parts talk',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Inside a solar panel',points:['Photovoltaic cells <b>convert</b> sunlight straight into <b>electricity</b>.','Each cell makes a small voltage; many cells joined make a <b>panel</b>.','<b>Silicon</b> is used because it reacts well to sunlight.','An inverter changes the panel\'s DC electricity into AC for appliances.']},{k:'discuss',title:'Discuss how panels work',label:'DISCUSS',prompts:['Trace the path: sunlight → cell → … → appliance. What happens at each step?','Why does a panel need many cells instead of one big one?','What job does the inverter do that the cells cannot?','Which step would you draw first to explain this to Year 4?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write the order: light → cell → inverter → appliance.'},{t:'Convert sentence',d:'Use \'convert\' correctly in one sentence about panels.'},{t:'Why silicon',d:'Explain in one line why silicon is used.'},{t:'Report line',d:'Draft one sentence explaining how a panel makes electricity.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Inside a solar panel — cloze',text:'Photovoltaic cells {{convert}} sunlight straight into {{electricity}}. Each cell makes a small voltage; many cells joined make a {{panel}}. {{Silicon}} is used because it reacts well to sunlight. An {{inverter}} changes the panel\'s DC electricity into AC for appliances.'}],
+  right:[{k:'discuss',title:'Discuss how panels work',label:'DISCUSS',prompts:['Trace the path: sunlight → cell → … → appliance. What happens at each step?','Why does a panel need many cells instead of one big one?','What job does the inverter do that the cells cannot?','Which step would you draw first to explain this to Year 4?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write the order: light → cell → inverter → appliance.'},{t:'Convert sentence',d:'Use \'convert\' correctly in one sentence about panels.'},{t:'Why silicon',d:'Explain in one line why silicon is used.'},{t:'Report line',d:'Draft one sentence explaining how a panel makes electricity.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L5D — Explain the convert chain',
   eyebrow:'Week 2 · Lesson 5 · Secure', eyebrowR:'Lesson 5 · Screen D',
@@ -717,9 +746,9 @@ SLIDES.push({ nav:'L6C — Weigh solar trade-offs',
   eyebrow:'Week 2 · Lesson 6 · Explore', eyebrowR:'Lesson 6 · Screen C',
   title:'Weigh solar trade-offs',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Solar — the trade-offs',points:['Solar is clean and, after install, cheap to run — it can <b>generate</b> power with no fuel.','Output drops at night and in cloud unless batteries store energy — a real <b>disadvantage</b>.','Panels are getting more <b>efficient</b>, but roof space and upfront cost still matter.','Reports weigh environmental and money factors together.']},{k:'discuss',title:'Discuss solar trade-offs',label:'DISCUSS',prompts:['Which matters more for a school — low running cost or reliable night power?','How do batteries change the biggest disadvantage of solar?','Is upfront cost a fair reason to avoid solar? Argue both sides.','What advantage would you lead with in a report paragraph?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages one side, challenges the other — three each.'},{t:'Rank them',d:'Put your challenges in order of how serious they are.'},{t:'Use a term',d:'Use \'efficient\' or \'disadvantage\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence: an advantage AND a challenge.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Solar trade-offs — cloze',text:'Solar is clean and, after install, cheap to run — it can {{generate}} power with no fuel. Output drops at night and in cloud unless batteries store energy — a real {{disadvantage}}. Panels are getting more {{efficient}}, but roof space and upfront {{cost}} still matter. Reports weigh environmental and money factors together when they {{evaluate}} solar.'}],
+  right:[{k:'discuss',title:'Discuss solar trade-offs',label:'DISCUSS',prompts:['Which matters more for a school — low running cost or reliable night power?','How do batteries change the biggest disadvantage of solar?','Is upfront cost a fair reason to avoid solar? Argue both sides.','What advantage would you lead with in a report paragraph?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages one side, challenges the other — three each.'},{t:'Rank them',d:'Put your challenges in order of how serious they are.'},{t:'Use a term',d:'Use \'efficient\' or \'disadvantage\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence: an advantage AND a challenge.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L6D — Pros-cons paragraph seed',
   eyebrow:'Week 2 · Lesson 6 · Secure', eyebrowR:'Lesson 6 · Screen D',
@@ -737,9 +766,9 @@ SLIDES.push({ nav:'L7C — Wind across Australia',
   eyebrow:'Week 3 · Lesson 7 · Explore', eyebrowR:'Lesson 7 · Screen C',
   title:'Wind across Australia',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Wind energy in Australia',points:['Wind is moving air with <b>kinetic energy</b>; a <b>turbine</b> turns that motion into electricity.','Groups of turbines together form a <b>wind farm</b>.','Wind is caused by the uneven heating of Earth\'s surface by the Sun.','Australia\'s open coasts and plains host many large wind farms.']},{k:'discuss',title:'Discuss wind in Australia',label:'DISCUSS',prompts:['Why are coasts and open plains good places for wind farms?','Wind is really \'moving air\' — so where does its energy first come from?','Would a wind farm suit your local area? Why or why not?','What fact about wind belongs in a report introduction?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the source',d:'Note the chain: Sun → uneven heating → wind → turbine.'},{t:'Local check',d:'Name one Australian region suited to wind and say why.'},{t:'Use a term',d:'Use \'kinetic energy\' or \'wind farm\' in one sentence.'},{t:'Report line',d:'Draft one factual sentence defining wind energy.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Wind energy — cloze',text:'Wind is moving air with {{kinetic energy}}; a {{turbine}} turns that motion into electricity. Groups of turbines together form a {{wind farm}}. Wind is caused by the uneven heating of Earth\'s surface by the {{Sun}}. Australia\'s open coasts and {{plains}} host many large wind farms.'}],
+  right:[{k:'discuss',title:'Discuss wind in Australia',label:'DISCUSS',prompts:['Why are coasts and open plains good places for wind farms?','Wind is really \'moving air\' — so where does its energy first come from?','Would a wind farm suit your local area? Why or why not?','What fact about wind belongs in a report introduction?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the source',d:'Note the chain: Sun → uneven heating → wind → turbine.'},{t:'Local check',d:'Name one Australian region suited to wind and say why.'},{t:'Use a term',d:'Use \'kinetic energy\' or \'wind farm\' in one sentence.'},{t:'Report line',d:'Draft one factual sentence defining wind energy.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L7D — Wind glossary prove',
   eyebrow:'Week 3 · Lesson 7 · Secure', eyebrowR:'Lesson 7 · Screen D',
@@ -756,9 +785,9 @@ SLIDES.push({ nav:'L8C — Blades to generator talk',
   eyebrow:'Week 3 · Lesson 8 · Explore', eyebrowR:'Lesson 8 · Screen C',
   title:'Blades to generator talk',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Inside a wind turbine',points:['Wind pushes the blades; their <b>rotation</b> spins a shaft.','The shaft turns a <b>generator</b> that makes electricity.','Longer blades sweep more air, so they can capture more energy.','<b>Offshore</b> turbines often catch stronger, steadier wind than inland ones.']},{k:'discuss',title:'Discuss how turbines work',label:'DISCUSS',prompts:['Trace the order: wind → blades → shaft → generator. What happens at each step?','Why does blade length change how much power a turbine makes?','What are the trade-offs of building turbines offshore?','Which step would you draw first to explain this?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write blades → rotation → shaft → generator in order.'},{t:'Rotation sentence',d:'Use \'rotation\' correctly in one sentence.'},{t:'Onshore vs offshore',d:'Note one advantage of offshore turbines.'},{t:'Report line',d:'Draft one sentence explaining how a turbine makes electricity.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Inside a wind turbine — cloze',text:'Wind pushes the blades; their {{rotation}} spins a shaft. The shaft turns a {{generator}} that makes electricity. Longer blades sweep more air, so they can capture more {{energy}}. {{Offshore}} turbines often catch stronger, steadier wind than inland ones. Writers explain this as a clear {{sequence}} for the reader.'}],
+  right:[{k:'discuss',title:'Discuss how turbines work',label:'DISCUSS',prompts:['Trace the order: wind → blades → shaft → generator. What happens at each step?','Why does blade length change how much power a turbine makes?','What are the trade-offs of building turbines offshore?','Which step would you draw first to explain this?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write blades → rotation → shaft → generator in order.'},{t:'Rotation sentence',d:'Use \'rotation\' correctly in one sentence.'},{t:'Onshore vs offshore',d:'Note one advantage of offshore turbines.'},{t:'Report line',d:'Draft one sentence explaining how a turbine makes electricity.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L8D — Explain the turbine chain',
   eyebrow:'Week 3 · Lesson 8 · Secure', eyebrowR:'Lesson 8 · Screen D',
@@ -775,9 +804,9 @@ SLIDES.push({ nav:'L9C — Weigh wind trade-offs',
   eyebrow:'Week 3 · Lesson 9 · Explore', eyebrowR:'Lesson 9 · Screen C',
   title:'Weigh wind trade-offs',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Wind — the trade-offs',points:['Wind is renewable and low-emission, but it is <b>intermittent</b> — it varies hour to hour.','Because wind is not always <b>consistent</b>, grids need backup or storage.','New <b>transmission</b> lines are often needed to carry wind power to cities.','Communities sometimes debate the look of turbines and effects on wildlife.']},{k:'discuss',title:'Discuss wind trade-offs',label:'DISCUSS',prompts:['How do we keep the lights on when the wind drops?','Is the view of turbines a fair reason to say no? Argue both sides.','Why can building transmission lines be as hard as building turbines?','Which advantage would you lead with in a report?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'intermittent\' or \'consistent\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Wind trade-offs — cloze',text:'Wind is renewable and low-emission, but it is {{intermittent}} — it varies hour to hour. Because wind is not always {{consistent}}, grids need backup or storage. New {{transmission}} lines are often needed to carry wind power to cities. Communities sometimes debate the look of turbines and effects on {{wildlife}}. Report writers must weigh both sides with fair {{evidence}}.'}],
+  right:[{k:'discuss',title:'Discuss wind trade-offs',label:'DISCUSS',prompts:['How do we keep the lights on when the wind drops?','Is the view of turbines a fair reason to say no? Argue both sides.','Why can building transmission lines be as hard as building turbines?','Which advantage would you lead with in a report?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'intermittent\' or \'consistent\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L9D — Wind pros-cons paragraph seed',
   eyebrow:'Week 3 · Lesson 9 · Secure', eyebrowR:'Lesson 9 · Screen D',
@@ -795,9 +824,9 @@ SLIDES.push({ nav:'L10C — Hydropower in Australia',
   eyebrow:'Week 4 · Lesson 10 · Explore', eyebrowR:'Lesson 10 · Screen C',
   title:'Hydropower in Australia',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Hydropower in Australia',points:['<b>Hydropower</b> uses moving water — often stored behind a <b>dam</b> — to spin turbines.','Water is held in a <b>reservoir</b> and released to make electricity when needed.','The whole cycle is driven by rainfall and gravity.','Snowy Hydro in the mountains is a famous Australian example.']},{k:'discuss',title:'Discuss hydropower in Australia',label:'DISCUSS',prompts:['Why does hydropower need both rain and gravity to work?','How can a dam release power exactly when demand spikes?','Why is hydro common in mountains and river systems?','What fact about hydropower belongs in a report intro?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the water',d:'Note the path: rain → reservoir → dam → turbine.'},{t:'Local example',d:'Name one Australian hydro scheme and its location.'},{t:'Use a term',d:'Use \'reservoir\' or \'dam\' in one sentence.'},{t:'Report line',d:'Draft one factual sentence defining hydropower.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Hydropower — cloze',text:'{{Hydropower}} uses moving water — often stored behind a {{dam}} — to spin turbines. Water is held in a {{reservoir}} and released to make electricity when needed. The whole cycle is driven by rainfall and {{gravity}}. {{Snowy Hydro}} in the mountains is a famous Australian example.'}],
+  right:[{k:'discuss',title:'Discuss hydropower in Australia',label:'DISCUSS',prompts:['Why does hydropower need both rain and gravity to work?','How can a dam release power exactly when demand spikes?','Why is hydro common in mountains and river systems?','What fact about hydropower belongs in a report intro?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the water',d:'Note the path: rain → reservoir → dam → turbine.'},{t:'Local example',d:'Name one Australian hydro scheme and its location.'},{t:'Use a term',d:'Use \'reservoir\' or \'dam\' in one sentence.'},{t:'Report line',d:'Draft one factual sentence defining hydropower.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L10D — Hydro glossary prove',
   eyebrow:'Week 4 · Lesson 10 · Secure', eyebrowR:'Lesson 10 · Screen D',
@@ -814,9 +843,9 @@ SLIDES.push({ nav:'L11C — Dam parts talk',
   eyebrow:'Week 4 · Lesson 11 · Explore', eyebrowR:'Lesson 11 · Screen C',
   title:'Dam parts talk',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Inside a hydro dam',points:['Water high in a reservoir stores <b>gravitational</b> <b>potential energy</b>.','It rushes down a large pipe called a <b>penstock</b>.','Falling water spins turbines, which drive generators.','Operators control the flow to match electricity demand.']},{k:'discuss',title:'Discuss how a dam works',label:'DISCUSS',prompts:['Trace the order: reservoir → penstock → turbine → generator.','Why does water high up have more energy than water low down?','How do operators use a dam like a giant on/off switch?','Which step would you draw first?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write water → penstock → turbine → generator in order.'},{t:'Energy words',d:'Use \'potential energy\' correctly in one sentence.'},{t:'Why high',d:'Explain in one line why height matters.'},{t:'Report line',d:'Draft one sentence explaining how a dam makes electricity.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Inside a hydro dam — cloze',text:'Water high in a reservoir stores gravitational {{potential energy}}. It rushes down a large pipe called a {{penstock}}. Falling water spins {{turbines}}, which drive generators. Operators control the {{flow}} to match electricity demand. Precise nouns help readers follow each {{step}}.'}],
+  right:[{k:'discuss',title:'Discuss how a dam works',label:'DISCUSS',prompts:['Trace the order: reservoir → penstock → turbine → generator.','Why does water high up have more energy than water low down?','How do operators use a dam like a giant on/off switch?','Which step would you draw first?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write water → penstock → turbine → generator in order.'},{t:'Energy words',d:'Use \'potential energy\' correctly in one sentence.'},{t:'Why high',d:'Explain in one line why height matters.'},{t:'Report line',d:'Draft one sentence explaining how a dam makes electricity.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L11D — Explain the water chain',
   eyebrow:'Week 4 · Lesson 11 · Secure', eyebrowR:'Lesson 11 · Screen D',
@@ -833,9 +862,9 @@ SLIDES.push({ nav:'L12C — Weigh hydro trade-offs',
   eyebrow:'Week 4 · Lesson 12 · Explore', eyebrowR:'Lesson 12 · Screen C',
   title:'Weigh hydro trade-offs',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Hydro — the trade-offs',points:['Hydro gives steady, reliable power and can start quickly.','But large dams can flood land and cause <b>displacement</b> of communities.','Changing a river can damage <b>habitat</b> and the wider <b>ecosystem</b>.','Fish ladders and environmental flows aim to reduce harm.']},{k:'discuss',title:'Discuss hydro trade-offs',label:'DISCUSS',prompts:['Is reliable power worth flooding a valley? Argue both sides.','How can engineers reduce harm to fish and rivers?','Who gains from a dam, and who might lose?','Which advantage would you lead with in a report?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'habitat\' or \'ecosystem\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Hydro trade-offs — cloze',text:'Hydro gives steady, reliable power and can start quickly. But large dams can flood land and cause {{displacement}} of communities. Changing a river can damage {{habitat}} and the wider {{ecosystem}}. Fish ladders and environmental flows aim to reduce {{harm}}. Balanced reports name both benefits and {{drawbacks}}.'}],
+  right:[{k:'discuss',title:'Discuss hydro trade-offs',label:'DISCUSS',prompts:['Is reliable power worth flooding a valley? Argue both sides.','How can engineers reduce harm to fish and rivers?','Who gains from a dam, and who might lose?','Which advantage would you lead with in a report?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'habitat\' or \'ecosystem\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L12D — Hydro pros-cons paragraph seed',
   eyebrow:'Week 4 · Lesson 12 · Secure', eyebrowR:'Lesson 12 · Screen D',
@@ -853,9 +882,9 @@ SLIDES.push({ nav:'L13C — Geothermal on Earth',
   eyebrow:'Week 5 · Lesson 13 · Explore', eyebrowR:'Lesson 13 · Screen C',
   title:'Geothermal on Earth',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Geothermal energy on Earth',points:['<b>Geothermal</b> energy uses heat from inside the Earth.','That heat comes from hot rock and <b>magma</b> below the surface.','It shows up as hot springs, geysers and volcanoes near plate boundaries.','A <b>geologist</b> studies rocks to find good sites; Iceland and NZ use it widely.']},{k:'discuss',title:'Discuss geothermal on Earth',label:'DISCUSS',prompts:['Where exactly does geothermal heat come from?','Why is geothermal common in Iceland but not everywhere?','What clues at the surface tell a geologist heat is near?','What fact about geothermal belongs in a report intro?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the heat',d:'Note the source: magma → hot rock → surface signs.'},{t:'Where it works',d:'Name one country that uses geothermal and why.'},{t:'Use a term',d:'Use \'magma\' or \'geologist\' in one sentence.'},{t:'Report line',d:'Draft one factual sentence defining geothermal energy.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Geothermal energy — cloze',text:'{{Geothermal}} energy uses heat from inside the Earth. That heat comes from hot rock and {{magma}} below the surface. It shows up as hot springs, geysers and volcanoes near plate boundaries. A {{geologist}} studies rocks to find good sites; Iceland and New Zealand use it widely. Writers define technical terms before they {{explain}} how the plant works.'}],
+  right:[{k:'discuss',title:'Discuss geothermal on Earth',label:'DISCUSS',prompts:['Where exactly does geothermal heat come from?','Why is geothermal common in Iceland but not everywhere?','What clues at the surface tell a geologist heat is near?','What fact about geothermal belongs in a report intro?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the heat',d:'Note the source: magma → hot rock → surface signs.'},{t:'Where it works',d:'Name one country that uses geothermal and why.'},{t:'Use a term',d:'Use \'magma\' or \'geologist\' in one sentence.'},{t:'Report line',d:'Draft one factual sentence defining geothermal energy.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L13D — Geothermal glossary prove',
   eyebrow:'Week 5 · Lesson 13 · Secure', eyebrowR:'Lesson 13 · Screen D',
@@ -872,9 +901,9 @@ SLIDES.push({ nav:'L14C — Geothermal plant parts talk',
   eyebrow:'Week 5 · Lesson 14 · Explore', eyebrowR:'Lesson 14 · Screen C',
   title:'Geothermal plant parts talk',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Inside a geothermal plant',points:['Engineers <b>drill</b> wells down to hot water or <b>steam</b>.','The steam rises and spins turbines, like other thermal power plants.','A natural <b>geyser</b> shows the same heat and pressure at the surface.','Cooled water can be reinjected underground in a closed loop.']},{k:'discuss',title:'Discuss how a plant works',label:'DISCUSS',prompts:['Trace the order: drill → hot water/steam → turbine → generator.','How is a geyser like a natural version of the plant?','Why reinject the water instead of dumping it?','Which step would you draw first?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write drill → steam → turbine → generator in order.'},{t:'Steam sentence',d:'Use \'steam\' correctly in one sentence.'},{t:'Closed loop',d:'Explain reinjection in one line.'},{t:'Report line',d:'Draft one sentence explaining how a plant makes electricity.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Inside a geothermal plant — cloze',text:'Engineers {{drill}} wells down to hot water or {{steam}}. The steam rises and spins turbines, like other thermal power plants. A natural {{geyser}} shows the same heat and pressure at the surface. Cooled water can be reinjected underground in a closed {{loop}}. Order words help a reader follow the {{process}}.'}],
+  right:[{k:'discuss',title:'Discuss how a plant works',label:'DISCUSS',prompts:['Trace the order: drill → hot water/steam → turbine → generator.','How is a geyser like a natural version of the plant?','Why reinject the water instead of dumping it?','Which step would you draw first?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Label the chain',d:'Write drill → steam → turbine → generator in order.'},{t:'Steam sentence',d:'Use \'steam\' correctly in one sentence.'},{t:'Closed loop',d:'Explain reinjection in one line.'},{t:'Report line',d:'Draft one sentence explaining how a plant makes electricity.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L14D — Explain the steam chain',
   eyebrow:'Week 5 · Lesson 14 · Secure', eyebrowR:'Lesson 14 · Screen D',
@@ -891,9 +920,9 @@ SLIDES.push({ nav:'L15C — Weigh geothermal trade-offs',
   eyebrow:'Week 5 · Lesson 15 · Explore', eyebrowR:'Lesson 15 · Screen C',
   title:'Weigh geothermal trade-offs',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Geothermal — the trade-offs',points:['Geothermal is reliable and low-emission, running day and night.','But it is <b>limited</b> to places with the right geology.','It works best in <b>volcanic</b> or plate-boundary regions.','Drilling is expensive, so not every region can <b>harness</b> it.']},{k:'discuss',title:'Discuss geothermal trade-offs',label:'DISCUSS',prompts:['Why is location the biggest limit on geothermal?','Is high drilling cost worth reliable power? Argue both sides.','How is geothermal different from solar in its trade-offs?','Which advantage would you lead with in a report?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'limited\' or \'volcanic\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Geothermal trade-offs — cloze',text:'Geothermal is reliable and low-emission, running day and night. But it is {{limited}} to places with the right geology. It works best in {{volcanic}} or plate-boundary regions. Drilling is expensive, so not every region can {{harness}} it. Strong paragraphs use a clear topic sentence then supporting {{detail}}.'}],
+  right:[{k:'discuss',title:'Discuss geothermal trade-offs',label:'DISCUSS',prompts:['Why is location the biggest limit on geothermal?','Is high drilling cost worth reliable power? Argue both sides.','How is geothermal different from solar in its trade-offs?','Which advantage would you lead with in a report?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'limited\' or \'volcanic\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L15D — Geothermal pros-cons paragraph seed',
   eyebrow:'Week 5 · Lesson 15 · Secure', eyebrowR:'Lesson 15 · Screen D',
@@ -911,9 +940,9 @@ SLIDES.push({ nav:'L16C — Tides around the coast',
   eyebrow:'Week 6 · Lesson 16 · Explore', eyebrowR:'Lesson 16 · Screen C',
   title:'Tides around the coast',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Tidal energy around the coast',points:['Tides rise and fall because of the Moon\'s and Sun\'s <b>gravitational pull</b> on the oceans.','<b>Tidal</b> energy captures the movement of that rising and falling water.','Tides are highly <b>predictable</b> — known years in advance.','The strongest tides occur in certain bays and channels.']},{k:'discuss',title:'Discuss tidal energy',label:'DISCUSS',prompts:['What causes the tides we want to capture?','Why is \'predictable\' a big advantage over wind and sun?','Why do some coasts have much stronger tides than others?','What fact about tides belongs in a report intro?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the cause',d:'Note: Moon/Sun gravity → ocean bulge → tides.'},{t:'Predictable plus',d:'Write one line on why predictability helps planners.'},{t:'Use a term',d:'Use \'gravitational pull\' or \'predictable\' in a sentence.'},{t:'Report line',d:'Draft one factual sentence defining tidal energy.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Tidal energy — cloze',text:'Tides rise and fall because of the Moon\'s and Sun\'s {{gravitational pull}} on the oceans. {{Tidal}} energy captures the movement of that rising and falling water. Tides are highly {{predictable}} — known years in advance. The strongest tides occur in certain bays and {{channels}}. Fact-rich openings suit an information {{report}}.'}],
+  right:[{k:'discuss',title:'Discuss tidal energy',label:'DISCUSS',prompts:['What causes the tides we want to capture?','Why is \'predictable\' a big advantage over wind and sun?','Why do some coasts have much stronger tides than others?','What fact about tides belongs in a report intro?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Trace the cause',d:'Note: Moon/Sun gravity → ocean bulge → tides.'},{t:'Predictable plus',d:'Write one line on why predictability helps planners.'},{t:'Use a term',d:'Use \'gravitational pull\' or \'predictable\' in a sentence.'},{t:'Report line',d:'Draft one factual sentence defining tidal energy.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L16D — Tidal glossary prove',
   eyebrow:'Week 6 · Lesson 16 · Secure', eyebrowR:'Lesson 16 · Screen D',
@@ -930,9 +959,9 @@ SLIDES.push({ nav:'L17C — Ways to capture tides',
   eyebrow:'Week 6 · Lesson 17 · Explore', eyebrowR:'Lesson 17 · Screen C',
   title:'Ways to capture tides',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Ways to capture tidal energy',points:['A <b>tidal barrage</b> is a wall across an <b>estuary</b> that traps water, then releases it through turbines.','A <b>tidal stream generator</b> sits in fast currents like an underwater windmill.','A tidal lagoon is an enclosed pool that fills and empties through turbines.','Engineers must protect fisheries and shipping when they build these.']},{k:'discuss',title:'Discuss capturing tides',label:'DISCUSS',prompts:['How is a barrage different from a stream generator?','Why put a generator in a fast current instead of behind a wall?','What impacts on wildlife and boats must engineers plan for?','Which method would you explain first in a report?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Compare methods',d:'Note one difference between barrage and stream generator.'},{t:'Pick and explain',d:'Choose one method and explain it in a sentence.'},{t:'Use a term',d:'Use \'estuary\' or \'tidal barrage\' correctly.'},{t:'Report line',d:'Draft one sentence explaining one way tides are captured.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Capturing tides — cloze',text:'A tidal {{barrage}} is a dam-like wall across an estuary that funnels water through turbines. {{Turbines}} under the sea can also spin as tides flow past. {{Streams}} of fast tidal water make the best sites. Engineers must protect shipping lanes and coastal {{habitats}}. Writers compare methods using shared {{criteria}}.'}],
+  right:[{k:'discuss',title:'Discuss capturing tides',label:'DISCUSS',prompts:['How is a barrage different from a stream generator?','Why put a generator in a fast current instead of behind a wall?','What impacts on wildlife and boats must engineers plan for?','Which method would you explain first in a report?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Compare methods',d:'Note one difference between barrage and stream generator.'},{t:'Pick and explain',d:'Choose one method and explain it in a sentence.'},{t:'Use a term',d:'Use \'estuary\' or \'tidal barrage\' correctly.'},{t:'Report line',d:'Draft one sentence explaining one way tides are captured.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L17D — Explain one tidal method',
   eyebrow:'Week 6 · Lesson 17 · Secure', eyebrowR:'Lesson 17 · Screen D',
@@ -949,9 +978,9 @@ SLIDES.push({ nav:'L18C — Criteria compare',
   eyebrow:'Week 6 · Lesson 18 · Explore', eyebrowR:'Lesson 18 · Screen C',
   title:'Criteria compare',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'know',label:'KNOWLEDGE',heading:'Comparing renewables by criteria',points:['No single renewable suits every place, so reports <b>compare</b> them fairly.','Good comparisons use clear criteria: reliability, cost, location and environment.','To <b>contrast</b> is to show how two options differ on one criterion.','Each type has an <b>advantage</b> that shines under the right conditions.']},{k:'discuss',title:'Discuss comparing renewables',label:'DISCUSS',prompts:['Which criterion matters most for a school — cost, reliability or environment?','Which two energy types are most alike? Which are most different?','Why is it unfair to compare two types without a shared criterion?','What criterion would head a comparison table?']}],
-  right:[{k:'steps',label:'Explore / Stretch',rows:[{t:'Pick a criterion',d:'Choose one: reliability, cost, location or environment.'},{t:'Compare two',d:'Compare solar and wind on that one criterion.'},{t:'Use a term',d:'Use \'compare\' or \'contrast\' correctly.'},{t:'Report line',d:'Draft one sentence comparing two types on one criterion.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Build report-writing habits: precise vocabulary, evidence, and structured talk.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Comparing renewables — cloze',text:'To {{compare}} energy types fairly, writers use the same {{criterion}} each time — such as cost, reliability or environment. {{Contrast}} language shows how two types differ. A comparison {{table}} helps readers scan facts quickly. Choose one criterion and stay with it so your paragraph does not {{drift}}. Precise vocabulary makes the judgement clearer for the {{audience}}.'}],
+  right:[{k:'discuss',title:'Discuss comparing renewables',label:'DISCUSS',prompts:['Which criterion matters most for a school — cost, reliability or environment?','Which two energy types are most alike? Which are most different?','Why is it unfair to compare two types without a shared criterion?','What criterion would head a comparison table?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Pick a criterion',d:'Choose one: reliability, cost, location or environment.'},{t:'Compare two',d:'Compare solar and wind on that one criterion.'},{t:'Use a term',d:'Use \'compare\' or \'contrast\' correctly.'},{t:'Report line',d:'Draft one sentence comparing two types on one criterion.'}]}],
+  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
 
 SLIDES.push({ nav:'L18D — Best-fit recommendation',
   eyebrow:'Week 6 · Lesson 18 · Secure', eyebrowR:'Lesson 18 · Screen D',
@@ -1116,6 +1145,99 @@ function win15(b){
 }
 
 
+
+function clozeCard(c){
+  const re = /\{\{([^}]+)\}\}/g;
+  const answers = [];
+  let m; const src = c.text||'';
+  while((m = re.exec(src))) answers.push(m[1]);
+  let i = 0;
+  const passage = src.replace(re, ()=>{
+    const ans = answers[i];
+    const n = i+1; i++;
+    return `<span class="cloze-blank" data-ans="${ans.replace(/"/g,'&quot;')}" data-i="${n}" tabindex="0"><span class="slot-n">${n}</span><span class="slot-txt">&nbsp;</span></span>`;
+  });
+  // stable shuffle for word bank
+  const bank = answers.map((w,idx)=>({w,idx}));
+  let seed = 0; for(const ch of (c.heading||src)) seed = (seed*31 + ch.charCodeAt(0))|0;
+  for(let a=bank.length-1;a>0;a--){ seed=(seed*1103515245+12345)&0x7fffffff; const b=seed%(a+1); [bank[a],bank[b]]=[bank[b],bank[a]]; }
+  const chips = bank.map(o=>`<button type="button" class="chip" data-word="${o.w.replace(/"/g,'&quot;')}">${o.w}</button>`).join('');
+  return `<div class="card cream cloze-card" data-cloze="1">
+    <span class="tag read">${c.label||'KNOWLEDGE — CLOZE'}</span>
+    ${c.heading?`<h3>${c.heading}</h3>`:''}
+    <div class="cloze-passage">${passage}</div>
+    <div class="cloze-bank-lbl">Word bank — jumbled · tap a word, then a blank</div>
+    <div class="cloze-bank">${chips}</div>
+    <div class="cloze-actions">
+      <button type="button" class="primary" data-cloze-check>Check</button>
+      <button type="button" data-cloze-reset>Reset</button>
+      <button type="button" data-cloze-reveal>Reveal</button>
+    </div>
+    <p class="cloze-hint">${c.hint||'Use each word once. Read the whole sentence before you choose.'}</p>
+  </div>`;
+}
+function wireCloze(){
+  const root = document.querySelector('[data-cloze="1"]');
+  if(!root) return;
+  let selected = null;
+  const bank = root.querySelector('.cloze-bank');
+  const blanks = [...root.querySelectorAll('.cloze-blank')];
+  function clearMarks(){ blanks.forEach(b=>b.classList.remove('correct','wrong')); }
+  function selectChip(chip){
+    bank.querySelectorAll('.chip').forEach(c=>c.classList.remove('picked'));
+    if(!chip || chip.classList.contains('used')){ selected=null; return; }
+    selected = chip; chip.classList.add('picked');
+  }
+  bank.addEventListener('click', e=>{
+    const chip = e.target.closest('.chip');
+    if(!chip) return;
+    selectChip(chip);
+  });
+  blanks.forEach(blank=>{
+    blank.addEventListener('click', ()=>{
+      clearMarks();
+      // return current word to bank
+      const cur = blank.dataset.filled;
+      if(cur){
+        const chip = [...bank.querySelectorAll('.chip')].find(c=>c.dataset.word===cur && c.classList.contains('used'));
+        if(chip) chip.classList.remove('used');
+        blank.dataset.filled = '';
+        blank.classList.remove('filled');
+        blank.querySelector('.slot-txt').innerHTML = '&nbsp;';
+      }
+      if(!selected) return;
+      const word = selected.dataset.word;
+      blank.dataset.filled = word;
+      blank.classList.add('filled');
+      blank.querySelector('.slot-txt').textContent = word;
+      selected.classList.add('used');
+      selected.classList.remove('picked');
+      selected = null;
+    });
+  });
+  root.querySelector('[data-cloze-reset]').addEventListener('click', ()=>{
+    selected=null; clearMarks();
+    bank.querySelectorAll('.chip').forEach(c=>c.classList.remove('used','picked'));
+    blanks.forEach(b=>{ b.dataset.filled=''; b.classList.remove('filled'); b.querySelector('.slot-txt').innerHTML='&nbsp;'; });
+  });
+  root.querySelector('[data-cloze-reveal]').addEventListener('click', ()=>{
+    selected=null; clearMarks();
+    bank.querySelectorAll('.chip').forEach(c=>{ c.classList.add('used'); c.classList.remove('picked'); });
+    blanks.forEach(b=>{
+      const ans=b.dataset.ans;
+      b.dataset.filled=ans; b.classList.add('filled','correct');
+      b.querySelector('.slot-txt').textContent=ans;
+    });
+  });
+  root.querySelector('[data-cloze-check]').addEventListener('click', ()=>{
+    blanks.forEach(b=>{
+      b.classList.remove('correct','wrong');
+      if(!b.dataset.filled){ b.classList.add('wrong'); return; }
+      b.classList.add(b.dataset.filled===b.dataset.ans ? 'correct' : 'wrong');
+    });
+  });
+}
+
 function knowCard(k){
   const body=(k.body||[]).map(p=>`<p style="margin-bottom:8px;line-height:1.4">${p}</p>`).join('');
   const pts=(k.points||[]).map(p=>`<li>${p}</li>`).join('');
@@ -1167,6 +1289,7 @@ function renderBlock(b){
     case 'wp': return wordpower(b.list);
     case 'steps': return steps(b);
     case 'win15': return win15(b);
+    case 'cloze': return clozeCard(b);
     case 'know': return knowCard(b);
     case 'discuss': return discussCard(b);
     case 'exit': return exitCheck(b.items);
@@ -1201,9 +1324,10 @@ function renderSlide(s){
     if(s.eyebrow) html+=`<span class="eyebrow">${s.eyebrow}</span>`;
     html += `<h1 class="title">${s.title}</h1>`;
     const isScreenA = (s.eyebrowR||'').includes('Screen A');
-    const colClass = isScreenA ? 'cols screen-a wide-left' : `cols ${s.wideLeft?'wide-left':''}`;
-    const leftCls = isScreenA ? 'col left-a' : 'col';
-    const rightCls = isScreenA ? 'col right-a' : 'col';
+    const isScreenC = (s.eyebrowR||'').includes('Screen C');
+    const colClass = isScreenA ? 'cols screen-a wide-left' : isScreenC ? 'cols screen-c wide-left' : `cols ${s.wideLeft?'wide-left':''}`;
+    const leftCls = isScreenA ? 'col left-a' : isScreenC ? 'col left-c' : 'col';
+    const rightCls = isScreenA ? 'col right-a' : isScreenC ? 'col right-c' : 'col';
     const left = (s.left||[]).map(renderBlock).join('');
     const right = (s.right||[]).map(renderBlock).join('');
     html += `<div class="${colClass}"><div class="${leftCls}">${left}</div><div class="${rightCls}">${right}</div></div>`;
@@ -1211,6 +1335,7 @@ function renderSlide(s){
   if(s.screenlbl) html+=`<div class="screenlbl">${s.screenlbl}</div>`;
   html += `<div class="corner"><kbd>T</kbd> notes · <kbd>D</kbd> detach · <kbd>A</kbd> assessment · <kbd>I</kbd> InfoReport</div>`;
   el.innerHTML = html;
+  wireCloze();
 }
 let idx = 0;
 function syncInfoReportBtn(){}
