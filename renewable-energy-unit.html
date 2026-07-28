@@ -34,6 +34,18 @@
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;min-height:0;}
   .cols.wide-left{grid-template-columns:1.25fr .9fr;}
   .cols.screen-a{grid-template-columns:1.15fr .92fr;align-items:stretch;}
+  .cols.read-a{grid-template-columns:1.35fr .85fr;align-items:stretch;gap:12px;}
+  .col.left-read{min-height:0;overflow:hidden;}
+  .col.left-read > .card.cream.long-read{
+    flex:1 1 auto;min-height:0;max-height:none;overflow:auto;padding:16px 18px;
+  }
+  .col.left-read > .card.cream.long-read h3{font-size:clamp(17px,1.8vw,22px);margin-bottom:10px;}
+  .col.left-read > .card.cream.long-read p{font-size:clamp(14px,1.35vw,17px);line-height:1.5;margin-bottom:10px;}
+  .col.right-read{min-height:0;overflow:hidden;gap:8px;}
+  .col.right-read .wp{flex:0 0 auto;}
+  .col.right-read .brain.checkin{flex:1 1 auto;min-height:0;overflow:auto;}
+  .brain.checkin .qtype{color:var(--mint);font-weight:800;margin-right:4px;}
+  .brain.checkin li{font-size:clamp(12.5px,1.25vw,15.5px);line-height:1.35;}
   .col{display:flex;flex-direction:column;gap:8px;min-height:0;overflow:hidden;}
   /* Screen A: READ grows; spelling sits mid-left; hero image fills bottom-right */
   .col.left-a > .card.cream{flex:1 1 auto;min-height:0;max-height:none;overflow:auto;}
@@ -46,6 +58,7 @@
   .col::-webkit-scrollbar{width:6px;} .col::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
   .col > .card.cream,
   .col > .steps{flex:0 1 auto;min-height:0;max-height:62%;overflow:auto;}
+  .col > .card.cream.eng-pack{flex:1 1 0;max-height:none;min-height:0;overflow:auto;}
   .col > .imgframe, .col > .imgrow{flex:1 1 0;min-height:100px;min-width:0;width:100%;}
   .card{border-radius:var(--radius);padding:20px 22px;}
   .card.cream{background:var(--cream);color:var(--cream-ink);box-shadow:0 10px 30px rgba(0,0,0,.25);overflow:auto;}
@@ -78,9 +91,12 @@
 
 
   /* Cloze knowledge (Screen C left) */
-  .col > .card.cloze-card{flex:1 1 auto;min-height:0;max-height:none;overflow:auto;display:flex;flex-direction:column;}
+  .col > .card.cloze-card{
+    flex:1 1 0;min-height:0;max-height:none !important;overflow:auto;
+    display:flex;flex-direction:column;
+  }
   .cloze-card h3{font-size:clamp(17px,1.8vw,22px);margin:4px 0 10px;}
-  .cloze-passage{font-size:clamp(15px,1.45vw,19px);line-height:1.65;color:var(--cream-ink);flex:1 1 auto;}
+  .cloze-passage{font-size:clamp(15px,1.45vw,19px);line-height:1.65;color:var(--cream-ink);flex:0 0 auto;}
   .cloze-blank{display:inline-flex;align-items:center;justify-content:center;min-width:4.5em;min-height:1.35em;margin:0 2px;padding:1px 8px;
     border-bottom:2.5px solid #c4b88a;border-radius:6px 6px 0 0;background:rgba(255,255,255,.55);cursor:pointer;
     font-weight:800;color:var(--notice-ink);vertical-align:baseline;transition:background .15s,border-color .15s;}
@@ -89,7 +105,7 @@
   .cloze-blank.correct{border-bottom-color:#2d6b58;background:var(--notice-bg);}
   .cloze-blank.wrong{border-bottom-color:#c45a5a;background:#fde8e8;}
   .cloze-blank .slot-n{font-size:10px;font-weight:800;color:#8a7a4a;margin-right:4px;}
-  .cloze-bank-lbl{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6a5a30;}
+  .cloze-bank-lbl{margin-top:auto;padding-top:14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6a5a30;}
   .cloze-bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
   .cloze-bank .chip{cursor:pointer;user-select:none;background:#fff;border:1px solid #d8cda6;border-radius:999px;padding:7px 12px;
     font-size:14px;font-weight:700;color:var(--cream-ink);transition:transform .12s,opacity .12s,border-color .12s;}
@@ -101,6 +117,39 @@
     border:1px solid #d8cda6;background:#fff;color:var(--cream-ink);}
   .cloze-actions button.primary{background:var(--mint);border-color:var(--mint);color:#063a2c;}
   .cloze-hint{margin-top:8px;font-size:13px;color:#4a5a54;font-style:italic;}
+
+  /* English drill — 10+10 worksheet style */
+  .cols.drill-cols{grid-template-columns:1fr 1fr;gap:12px;align-items:stretch;}
+  .col.drill-side{min-height:0;overflow:hidden;}
+  .col.drill-side > .drill-panel{
+    flex:1 1 0;min-height:0;max-height:none;overflow:auto;
+    background:var(--cream);color:var(--cream-ink);border-radius:var(--radius);
+    border:1.5px solid #c5d6a8;padding:0 0 10px;box-shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  .drill-head{
+    background:#b7d46a;color:#1a2a10;font-weight:900;font-size:clamp(14px,1.4vw,17px);
+    letter-spacing:.02em;text-align:center;padding:9px 12px;border-radius:var(--radius) var(--radius) 0 0;
+    border-bottom:1px solid #9bbb4e;
+  }
+  .drill-qs{list-style:none;padding:6px 11px 2px;margin:0;display:flex;flex-direction:column;gap:5px;}
+  .drill-qs li{display:grid;grid-template-columns:20px 1fr;gap:5px;align-items:start;
+    font-size:clamp(11px,1.1vw,13px);line-height:1.22;}
+  .drill-qs .dn{font-weight:900;color:#d62828;padding-top:1px;}
+  .drill-qs .ask{color:var(--cream-ink);font-weight:650;}
+  .drill-qs .samp{display:block;margin-top:1px;font-style:italic;color:#2f6f62;font-weight:600;}
+  .drill-qs .line{display:none;}
+  .drill-qs .choices{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:2px;font-weight:700;color:#2f6f62;}
+  .drill-qs .yn{display:none;}
+  .drill-qs .yn span{display:none;}
+  .drill-qs .yn i{display:none;}
+  .slide.lesson .title.drill-title{font-size:clamp(20px,2.5vw,30px);margin:4px 0 6px;}
+  .col > .card.cream.stem-card{flex:1 1 0;max-height:none;min-height:0;overflow:auto;}
+  .stem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .stem-grid span{
+    background:#fff;border:1px solid #d8cda6;border-radius:12px;padding:12px 14px;
+    font-weight:800;font-size:clamp(14px,1.35vw,17px);color:var(--cream-ink);line-height:1.25;
+  }
+
   .cols.screen-c{grid-template-columns:1.2fr .95fr;}
   .col.right-c > .discuss-card{flex:1 1 auto;min-height:0;overflow:auto;}
   .col.right-c > .steps{flex:0 1 auto;max-height:48%;}
@@ -625,7 +674,7 @@ SLIDES.push({ type:'overview', nav:'Unit overview', eyebrow:'Year 5 English · 8
   {week:2,n:6,topic:'Solar — Pros & Cons',englishA:'Word Work: efficient, disadvantage, generate · Spelling: prefix: dis- · Discussion starters',englishB:'Sentence work: Starters · Reading passage · Workbook notes',learn:'Evaluate advantages and disadvantages of solar power',report:'Solar body paragraph'},
   {week:3,n:7,topic:'What is Wind Energy?',englishA:'Word Work: turbine, wind farm, kinetic energy · Spelling: suffix: -ation · Discussion starters',englishB:'Sentence work: Analyse · Reading passage · Workbook notes',learn:'Understand wind as kinetic energy; describe turbines and wind farms',report:'Glossary — wind terms'},
   {week:3,n:8,topic:'How Wind Turbines Work',englishA:'Word Work: generator, offshore, rotation · Spelling: suffix: -or · Discussion starters',englishB:'Sentence work: Combine · Reading passage · Workbook notes',learn:'Explain how spinning blades drive a generator to make electricity',report:'Wind topic sentence'},
-  {week:3,n:9,topic:'Wind — Pros & Cons',englishA:'Word Work: intermittent, consistent, transmission · Spelling: suffix: -ent · Discussion starters',englishB:'Sentence work: Starters · Reading passage · Workbook notes',learn:'Evaluate advantages and disadvantages of wind power',report:'Wind body paragraph'},
+  {week:3,n:9,topic:'Wind — Pros & Cons',englishA:'A: Long reading + check-in · B: English practice 10+10',englishB:'C: Cloze · D: Wind body paragraph',learn:'Evaluate advantages and disadvantages of wind power',report:'Wind body paragraph'},
   {week:4,n:10,topic:'What is Hydropower?',englishA:'Word Work: hydropower, dam, reservoir · Spelling: prefix: hydro- · Discussion starters',englishB:'Sentence work: Analyse · Reading passage · Workbook notes',learn:'Describe how moving water and dams store energy',report:'Glossary — hydro terms'},
   {week:4,n:11,topic:'How Hydro Dams Work',englishA:'Word Work: potential energy, penstock, gravitational · Spelling: suffix: -al · Discussion starters',englishB:'Sentence work: Combine · Reading passage · Workbook notes',learn:'Explain potential energy, penstocks and how dams generate power',report:'Hydro topic sentence'},
   {week:4,n:12,topic:'Hydropower — Pros & Cons',englishA:'Word Work: habitat, displacement, ecosystem · Spelling: suffix: -ment · Discussion starters',englishB:'Sentence work: Starters · Reading passage · Workbook notes',learn:'Evaluate advantages and disadvantages of hydropower',report:'Hydro body paragraph'},
@@ -797,24 +846,34 @@ SLIDES.push({ nav:'L8D — Explain the turbine chain',
   right:[{k:'discuss',title:'Explain the turbine chain',label:'DISCUSS',prompts:['Is your explanation in the right order? Where might a reader get lost?','Which word matters most — rotation, generator or offshore?','How would a labelled diagram help your reader?','What heading suits this section?']},{k:'exit',items:['use vocabulary accurately','complete workbook tasks','add to my glossary or report']}],
   notes:`<h4>Screen D — secure</h4><p>Students prove understanding in sentences fit for an information report.</p>` });
 
-SLIDES.push({ nav:'L9A — Wind Energy Pros and Cons', eyebrow:'Week 3 · Lesson 9 · Learn', eyebrowR:'Lesson 9 · Screen A', title:'Wind Energy — Pros & Cons', screenlbl:'Student screen 1 of 4', wideLeft:true, left:[{k:'read',heading:'Wind pros and cons',body:['Wind is renewable and low-emission but varies hour to hour.','Grid connections and community views about landscape impact matter.'],notice:'Key terms: intermittent, consistent, transmission.'},{k:'html', html:`<div class="card spell"><span class="tag read">SPELLING FOCUS — suffix: -ent</span><p class="spell-words"><span>in·ter·mit·tent</span><span>con·sis·tent</span><span>ef·fi·cient</span></p><p class="spell-hint">What do these three words have in common? Add one more -ent word.</p></div>`}, {k:'hook', q:'Imagine you are a farmer. Would you want a wind turbine on your land? What would be good and bad about it?'}], right:[ {k:'win15', can:'name one advantage and one challenge of wind energy', prove:'Give a reason for each.'},{k:'wp', list:[{t:'intermittent',d:'not continuous; stopping and starting at irregular intervals'}, {t:'consistent',d:'happening at the same rate or level without much variation'}, {t:'transmission',d:'the process of sending electricity through power lines'}]},  {k:'img', hero:true, src:'wind-offshore.png', cap:'Wind Energy — Pros & Cons'}], notes:`<p>Week 3 · Lesson 9 · Learn — Wind Energy — Pros & Cons</p>` });
-SLIDES.push({ nav:'L9B — Content', eyebrow:'Week 3 · Lesson 9 · Apply', eyebrowR:'Lesson 9 · Screen B', title:'Week 3 Lesson 9 — Content', screenlbl:'Student screen 2 of 4', wideLeft:true, left:[{k:'html', html:`<div class="card cream"><span class="tag do">SENTENCE WORK — </span><p style="margin-top:10px;font-size:14px;color:#4a5a54">Starters: "One advantage of wind energy is…"  |  "However, wind energy can be…"</p></div>`}, {k:'read', heading:'Reading', body:['Wind energy is clean and emits no greenhouse gases. It is among the cheapest sources of new electricity in many countries, and once turbines are installed, the wind is free. However, wind is intermittent — turbines only generate power when wind blows at the right speed. Some communities object to turbines because of noise or visual impact on the landscape. Wind farms also require significant land or sea area to operate effectively.', 'Complete your Advantages / Disadvantages table for wind energy. List 2 of each.', 'Draft your wind energy body paragraph: topic sentence + 2 details + closing sentence.', '⭐ Challenge: Write a letter to a local council recommending wind energy for your community.']}], right:[{k:'steps', label:'Do this', rows:[{t:'Note-taking',d:'Complete your Advantages / Disadvantages table for wind energy. List 2 of each.'}, {t:'Report Work — Body Paragraph',d:'Draft your wind energy body paragraph: topic sentence + 2 details + closing sentence.'}]}, {k:'html', html:`<div class="card dark"><span class="tag try">CHALLENGE</span><p style="margin-top:10px;color:var(--ink);font-size:15px;line-height:1.5">⭐ Challenge: Write a letter to a local council recommending wind energy for your community.</p></div>`}], notes:`<p>Week 3 · Lesson 9 · Apply — Week 3 Lesson 9 — Content</p>` });
-
-SLIDES.push({ nav:'L9C — Weigh wind trade-offs',
-  eyebrow:'Week 3 · Lesson 9 · Explore', eyebrowR:'Lesson 9 · Screen C',
-  title:'Weigh wind trade-offs',
+SLIDES.push({ nav:'L9A — Wind Energy Pros and Cons', eyebrow:'Week 3 · Lesson 9 · Read', eyebrowR:'Lesson 9 · Screen A', title:'Wind Energy — Pros & Cons', screenlbl:'Student screen 1 of 4', layout:'read', left:[{k:'read', long:true, heading:'Weighing the wind', body:['Wind energy is one of the fastest-growing renewable sources in the world. When the wind turns the blades of a turbine, a generator converts that movement into electricity. Unlike coal or gas, wind power does not burn fuel, so it does not release greenhouse gases while it is running. In many places it is also among the cheapest ways to add new electricity to the grid. Once the turbines are built, the wind itself is free.', 'That does not mean wind energy is simple or perfect. Wind is intermittent: turbines only produce power when the wind blows within a useful range of speeds. On calm days output falls, and communities still need other sources or stored energy to keep supply consistent. Engineers connect wind farms to the grid through transmission lines, which can be expensive to build across long distances.', 'Wind farms also change the landscape. Onshore turbines need space between them and can be visible for kilometres. Some people enjoy the sight of clean energy; others feel turbines spoil views or create unwanted noise. Offshore wind farms sit out at sea, where winds are often stronger and more steady, but building and maintaining them is harder and more costly.', 'Wildlife is another concern. Birds and bats can collide with spinning blades, so careful siting and monitoring matter. At the same time, many communities welcome wind projects because they create construction and maintenance jobs and can pay landholders for turbine sites. Other communities oppose new farms because of noise, visual impact, or worries about property values.', 'A fair judgement weighs both sides. Wind energy can cut emissions and provide low-cost power, but it is not always available, it uses land or sea space, and it can affect people and animals nearby. Good decisions use evidence from both the advantages and the disadvantages.'], notice:'Look for both advantages and disadvantages as you read. You will use this text for check-in, cloze and your report paragraph.'}], right:[ {k:'wp', list:[{t:'intermittent',d:'not continuous; stopping and starting at irregular intervals'}, {t:'consistent',d:'happening at the same rate or level without much variation'}, {t:'transmission',d:'the process of sending electricity through power lines'}, {t:'landscape',d:'the visible features of an area of land'}, {t:'offshore',d:'located in the sea, away from the coast'}]}, {k:'checkin', items:[{type:'Literal:', q:'From the text, list two advantages of wind energy and two disadvantages.'}, {type:'Literal:', q:'What does the text say happens on calm days, and how can communities keep supply going?'}, {type:'Inferential:', q:'Wind is free after turbines are built — so why do wind farms still cost a lot of money?'}, {type:'Inferential:', q:'Why might an offshore wind farm be chosen even though it is harder and more costly to build?'}, {type:'Evaluative:', q:'Would you support a wind farm near your community? Use at least two pieces of evidence from the text to explain your judgement.'}]} ], notes:`<h4>Screen A — Read + respond</h4><p>Long passage left; Word Work + written 15-min check-in right (literal / inferential / evaluative).</p>` });
+SLIDES.push({ nav:'L9B — English practice',
+  eyebrow:'Week 3 · Lesson 9 · English practice', eyebrowR:'Lesson 9 · Screen B',
+  title:'English practice — wind words',
+  screenlbl:'Student screen 2 of 4', layout:'drill',
+  left:[{k:'drill', title:'SET A · Spelling & words', qs:[{ask:"Correct the spelling mistake.",sample:"Wind power can be intermitent on calm days."},{ask:"Unjumble the word.",sample:"nssiontramsi"},{ask:"Circle the correct spelling.",choices:["intermittent","intermitant","intermittant"],line:false},{ask:"A synonym for consistent is:",choices:["steady","random","broken"],line:false},{ask:"Write an antonym (opposite) of intermittent."},{ask:"Add the suffix -ent.",sample:"consist \u2192 ________"},{ask:"How many syllables are in transmission?",choices:["2","3","4"],line:false},{ask:"Circle the noun that names a place\u2019s look.",sample:"Wind farms change the landscape."},{ask:"Correct the spelling mistake.",sample:"Offshor turbines sit out at sea."},{ask:"Rewrite with a capital letter and a full stop.",sample:"wind energy is renewable"}]}],
+  right:[{k:'drill', title:'SET B · Grammar & sentences', qs:[{ask:"Add a comma.",sample:"Although wind is free turbines still cost money."},{ask:"Circle the contrast connective.",sample:"Wind is clean however it is intermittent."},{ask:"Change this sentence to simple past tense.",sample:"Turbines generate electricity."},{ask:"Is this a statement, question or command?",sample:"Would you support a wind farm nearby?",choices:["statement","question","command"],line:false},{ask:"Add the missing apostrophe.",sample:"The farmers land holds three turbines."},{ask:"Underline the subject.",sample:"Transmission lines carry power to cities."},{ask:"Join using however or although.",sample:"Wind is cheap to run. Output falls on calm days."},{ask:"Rewrite in formal report language.",sample:"Sometimes the wind just doesn\u2019t blow enough."},{ask:"Circle the verbs.",sample:"Engineers connect wind farms to the grid."},{ask:"The underlined word is a technical term.",sample:"Wind is intermittent.",yn:true,line:false}]}],
+  notes:`<h4>Screen B — English practice (10 + 10)</h4><p>Dense worksheet-style drills. Students write answers in workbooks. Quick mark: Set A keys — intermittent; transmission; intermittent; steady; continuous/steady/constant; consistent; 3 or 4 (ac-cept 3–4); landscape; offshore; Wind energy is renewable. Set B — comma after free; however; generated; question; farmer’s; Transmission lines; Although/However join; formal intermittent phrasing; connect/carry; Yes.</p>` });
+SLIDES.push({ nav:'L9C — Cloze',
+  eyebrow:'Week 3 · Lesson 9 · Cloze', eyebrowR:'Lesson 9 · Screen C',
+  title:'Cloze — fill the gaps',
   screenlbl:'Student screen 3 of 4', wideLeft:true,
-  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Wind trade-offs — cloze',text:'Wind is renewable and low-emission, but it is {{intermittent}} — it varies hour to hour. Because wind is not always {{consistent}}, grids need backup or storage. New {{transmission}} lines are often needed to carry wind power to cities. Communities sometimes debate the look of turbines and effects on {{wildlife}}. Report writers must weigh both sides with fair {{evidence}}.'}],
-  right:[{k:'discuss',title:'Discuss wind trade-offs',label:'DISCUSS',prompts:['How do we keep the lights on when the wind drops?','Is the view of turbines a fair reason to say no? Argue both sides.','Why can building transmission lines be as hard as building turbines?','Which advantage would you lead with in a report?']},{k:'steps',label:'Explore / Stretch',rows:[{t:'Two-column note',d:'List advantages and challenges — three each.'},{t:'Rank them',d:'Order the challenges by seriousness.'},{t:'Use a term',d:'Use \'intermittent\' or \'consistent\' in one sentence.'},{t:'Report line',d:'Draft one balanced sentence with a pro and a con.'}]}],
-  notes:`<h4>Screen C — explore</h4><p>Open with the cloze (jumbled word bank) on the left — key vocabulary in context. Then discuss and explore tasks on the right.</p>` });
-
-SLIDES.push({ nav:'L9D — Wind pros-cons paragraph seed',
-  eyebrow:'Week 3 · Lesson 9 · Secure', eyebrowR:'Lesson 9 · Screen D',
-  title:'Wind pros-cons paragraph seed',
-  screenlbl:'Student screen 4 of 4',
-  left:[{k:'know',label:'SUMMARY',heading:'Wind pros and cons — prove it',points:['Wind is clean and low-cost to run but varies with the weather.','A balanced report gives a reason for each point.']},{k:'steps',label:'Secure / Prove',rows:[{t:'Seed a paragraph',d:'Topic sentence + one pro + one con about wind, each with a reason.'},{t:'Link to place',d:'Tie one point to an Australian region.'},{t:'Partner check',d:'Partner ticks for balance and reasons.'},{t:'Exit ready',d:'Exit check.'}]}],
-  right:[{k:'discuss',title:'Wind pros-cons paragraph seed',label:'DISCUSS',prompts:['Did you give a reason for each point, not just name it?','Which con matters most for reliable power?','How does storage answer the \'intermittent\' problem?','What heading fits a pros-and-cons section?']},{k:'exit',items:['use vocabulary accurately','complete workbook tasks','add to my glossary or report']}],
-  notes:`<h4>Screen D — secure</h4><p>Students prove understanding in sentences fit for an information report.</p>` });
+  left:[{k:'cloze',label:'KNOWLEDGE — CLOZE',heading:'Wind — pros and cons',text:'Wind turbines make electricity without releasing {{greenhouse}} gases while they run. Still, wind is {{intermittent}}: output falls when the wind is too weak, so other sources may be needed to keep supply {{consistent}}. Onshore farms can change the {{landscape}}, while {{offshore}} turbines sit out at sea where winds are often stronger. Power reaches homes through {{transmission}} lines. Careful siting helps protect {{wildlife}}, and report writers weigh both sides with fair {{evidence}}.'}],
+  right:[
+  {k:'html', html:`<div class="card cream"><span class="tag do">REPORT LANGUAGE</span><h3 style="margin:8px 0 6px;color:var(--cream-ink)">From today’s cloze</h3><p style="margin-bottom:8px;font-size:14px;color:#4a5a54">Use only words that appear in the cloze passage.</p><p style="margin-bottom:8px"><b>1. Effective verbs</b> — find and list verbs from the cloze that do real work in a report (e.g. <i>releasing, protect, weigh</i>).</p><p style="margin-bottom:8px"><b>2. Important report nouns</b> — list precise nouns from the cloze (e.g. <i>transmission, landscape, wildlife, evidence</i>).</p><p style="margin-bottom:0"><b>3. Useful adjectives</b> — list describing words from the cloze that sound careful and formal (e.g. <i>intermittent, consistent, offshore, fair</i>).</p></div>`},
+  {k:'discuss', title:'Share your word bank', label:'TALK', prompts:['Which cloze verb would you use first in a wind body paragraph?','Which cloze noun is most important for your audience?','Which cloze adjective helps a report sound balanced?']}
+],
+  notes:`<h4>Screen C — Cloze</h4><p>Answer key: greenhouse, intermittent, consistent, landscape, offshore, transmission, wildlife, evidence. Right side: harvest verbs, nouns and adjectives from the cloze text only.</p>` });
+SLIDES.push({ nav:'L9D — Report Work',
+  eyebrow:'Week 3 · Lesson 9 · Report', eyebrowR:'Lesson 9 · Screen D',
+  title:'Report work — wind body paragraph',
+  screenlbl:'Student screen 4 of 4', wideLeft:true,
+  left:[{k:'html', html:`<div class="card cream stem-card"><span class="tag do">BUILD A PARAGRAPH</span><h3 style="margin:8px 0 6px;color:var(--cream-ink)">Choose stems · finish the sentences</h3><p style="margin-bottom:12px;font-size:14px;color:#4a5a54">Select stems to draft a balanced wind body paragraph (topic + advantage + disadvantage + close). Include at least one Word Work term.</p><div class="stem-grid"><span>Wind energy is…</span><span>One advantage is…</span><span>For example,…</span><span>This means that…</span><span>However, wind can…</span><span>On the other hand…</span><span>Although wind is…</span><span>Communities often debate…</span><span>Overall, wind energy…</span><span>In summary,…</span></div></div>`}],
+  right:[
+  {k:'html', html:`<div class="card cream"><span class="tag wow">CHALLENGE</span><h3 style="margin:8px 0 6px;color:var(--cream-ink)">Council letter</h3><p style="margin-bottom:10px">Write a short letter to your local council recommending <b>for</b> or <b>against</b> a wind farm nearby.</p><p style="margin-bottom:8px">Use:</p><p style="margin-bottom:4px">• two pieces of evidence from the Screen A reading</p><p style="margin-bottom:4px">• at least one Word Work term</p><p style="margin-bottom:0">• a clear recommendation in the final sentence</p></div>`},
+  {k:'exit', items:['explain one advantage and one disadvantage of wind energy','use intermittent or transmission in a sentence','draft a wind body paragraph for my report']}
+],
+  notes:`<h4>Screen D — Report</h4><p>Left: 10 short sentence stems (≤4 words) to build a wind body paragraph. Right: council letter challenge + exit check.</p>` });
 
 SLIDES.push({ type:'divider', nav:'Week 4', eyebrow:'Week 4 · English', title:'Week 4', goals:['Understand hydropower and dams', 'Explain how hydroelectric dams generate electricity', 'Evaluate advantages and disadvantages of hydropower'], notes:`<p>Week 4 — preview goals with students.</p>` });
 SLIDES.push({ nav:'L10A — What is Hydropower?', eyebrow:'Week 4 · Lesson 10 · Learn', eyebrowR:'Lesson 10 · Screen A', title:'What is Hydropower?', screenlbl:'Student screen 1 of 4', wideLeft:true, left:[{k:'read',heading:'Hydropower',body:['Hydropower uses moving water — often stored behind dams — to spin turbines.','Australia uses hydro in snowy mountains and some river systems.'],notice:'Key terms: hydropower, dam, reservoir.'},{k:'html', html:`<div class="card spell"><span class="tag read">SPELLING FOCUS — prefix: hydro-</span><p class="spell-words"><span>hy·dro·pow·er</span><span>hy·dro·e·lec·tric</span><span>hy·dro·gen</span></p><p class="spell-hint">hydro- = water in Greek. How does each word connect to water?</p></div>`}, {k:'hook', q:'Have you ever stood near a waterfall or fast-moving river? Where does all that power come from?'}], right:[ {k:'win15', can:'define hydropower in my own words', prove:'Say what moves through the dam/turbine.'},{k:'wp', list:[{t:'hydropower',d:'electricity generated from the energy of moving water'}, {t:'dam',d:'a barrier built across a river to hold back water'}, {t:'reservoir',d:'a large artificial lake used to store water'}]},  {k:'img', hero:true, src:'hydro-dam.png', cap:'What is Hydropower?'}], notes:`<p>Week 4 · Lesson 10 · Learn — What is Hydropower?</p>` });
@@ -1132,8 +1191,13 @@ function wordpower(list){
   return `<div class="card dark wp"><h4>Word Work — Vocabulary</h4><div class="wp-grid">${
     list.map(w=>`<div class="chip"><b>${w.t}</b><span>${w.d}</span></div>`).join('')}</div></div>`;
 }
+function checkin(items){
+  return `<div class="brain checkin"><div class="lbl">⏱ 15-min check-in — write in your workbook</div>
+    <ol>${items.map((it,i)=>`<li><span class="n">${i+1}</span><span><b class="qtype">${it.type}</b> ${it.q}</span></li>`).join('')}</ol></div>`;
+}
 function readCard(r){
-  return `<div class="card cream"><span class="tag ${r.wow?'wow':'read'}">${r.label||(r.wow?'WOW · READ':'READ')}</span>
+  const longCls = r.long ? ' long-read' : '';
+  return `<div class="card cream${longCls}"><span class="tag ${r.wow?'wow':'read'}">${r.label||(r.wow?'WOW · READ':'READ')}</span>
     <h3>${r.heading}</h3>${(r.body||[]).map(p=>`<p style="margin-bottom:10px">${p}</p>`).join('')}
     ${r.notice?`<div class="notice"><b>Notice:</b> ${r.notice}</div>`:''}</div>`;
 }
@@ -1246,6 +1310,20 @@ function knowCard(k){
     ${pts?`<ul class="know-list">${pts}</ul>`:''}
     ${k.fact?`<div class="notice"><b>Key idea:</b> ${k.fact}</div>`:''}</div>`;
 }
+
+function drillQ(q, n){
+  let body = `<span class="ask">${q.ask||''}</span>`;
+  if(q.sample) body += `<span class="samp">${q.sample}</span>`;
+  if(q.choices && q.choices.length) body += `<span class="choices">${q.choices.map(c=>`<span>${c}</span>`).join('')}</span>`;
+  if(q.yn) body += `<span class="choices"><span>Yes</span><span>No</span></span>`;
+  return `<li><span class="dn">${n}.</span><div>${body}</div></li>`;
+}
+function drillPanel(p){
+  const qs = p.qs||[];
+  return `<div class="drill-panel"><div class="drill-head">${p.title||'English practice'}</div>
+    <ol class="drill-qs">${qs.map((q,i)=>drillQ(q, i+1)).join('')}</ol></div>`;
+}
+
 function discussCard(d){
   return `<div class="card dark discuss-card"><span class="tag try">${d.label||'DISCUSS'}</span>
     <h3>${d.title||'Talk it through'}</h3>
@@ -1286,12 +1364,14 @@ function renderBlock(b){
     case 'read': return readCard(b);
     case 'hook': return hook(b.q);
     case 'brain': return bq(b.q);
+    case 'checkin': return checkin(b.items);
     case 'wp': return wordpower(b.list);
     case 'steps': return steps(b);
     case 'win15': return win15(b);
     case 'cloze': return clozeCard(b);
     case 'know': return knowCard(b);
     case 'discuss': return discussCard(b);
+    case 'drill': return drillPanel(b);
     case 'exit': return exitCheck(b.items);
     case 'img': return `<div class="imgframe${b.hero?' hero':''}${b.diagram?' diagram':''}${b.fit?' fit':''}"><img src="${b.src}" alt="${b.alt||''}" loading="lazy" onerror="this.style.opacity='0.3'">${b.cap?`<div class="cap">${b.cap}</div>`:''}</div>`;
     case 'html': return b.html;
@@ -1317,17 +1397,19 @@ function renderSlide(s){
       <button class="btn assess" style="padding:14px 26px;font-size:17px" onclick="openOverlay()">📋 Open assessment task</button>`;
   } else if(s.type==='overview'){
     if(s.eyebrow) html+=`<span class="eyebrow">${s.eyebrow}</span>`;
-    html += `<h1 class="title">${s.title}</h1>`;
+    html += `<h1 class="title${s.layout==='drill'?' drill-title':''}">${s.title}</h1>`;
     if(s.sub) html += `<p class="sub">${s.sub}</p>`;
     html += progressionTable(s.rows||[]);
   } else {
     if(s.eyebrow) html+=`<span class="eyebrow">${s.eyebrow}</span>`;
     html += `<h1 class="title">${s.title}</h1>`;
-    const isScreenA = (s.eyebrowR||'').includes('Screen A');
-    const isScreenC = (s.eyebrowR||'').includes('Screen C');
-    const colClass = isScreenA ? 'cols screen-a wide-left' : isScreenC ? 'cols screen-c wide-left' : `cols ${s.wideLeft?'wide-left':''}`;
-    const leftCls = isScreenA ? 'col left-a' : isScreenC ? 'col left-c' : 'col';
-    const rightCls = isScreenA ? 'col right-a' : isScreenC ? 'col right-c' : 'col';
+    const isReadA = s.layout === 'read';
+    const isDrill = s.layout === 'drill';
+    const isScreenA = !isReadA && !isDrill && (s.eyebrowR||'').includes('Screen A');
+    const isScreenC = !isReadA && !isDrill && (s.eyebrowR||'').includes('Screen C');
+    const colClass = isDrill ? 'cols drill-cols' : isReadA ? 'cols read-a' : isScreenA ? 'cols screen-a wide-left' : isScreenC ? 'cols screen-c wide-left' : `cols ${s.wideLeft?'wide-left':''}`;
+    const leftCls = isDrill ? 'col drill-side' : isReadA ? 'col left-read' : isScreenA ? 'col left-a' : isScreenC ? 'col left-c' : 'col';
+    const rightCls = isDrill ? 'col drill-side' : isReadA ? 'col right-read' : isScreenA ? 'col right-a' : isScreenC ? 'col right-c' : 'col';
     const left = (s.left||[]).map(renderBlock).join('');
     const right = (s.right||[]).map(renderBlock).join('');
     html += `<div class="${colClass}"><div class="${leftCls}">${left}</div><div class="${rightCls}">${right}</div></div>`;
